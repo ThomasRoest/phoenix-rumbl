@@ -15,6 +15,9 @@ defmodule Rumbl.User do
     model
       |> cast(params, ~w(name username), [])
       |> validate_length(:username, min: 1, max: 20)
+      #unique index was added to database, the below is to add the error to changeset
+      |> unique_constraint(:username)
+
   end
 
   def registration_changeset(model, params) do
